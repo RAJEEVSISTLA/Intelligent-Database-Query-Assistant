@@ -81,6 +81,6 @@ Access the interface at `http://localhost:5000`.
 ## 👥 Contributors
 
 - S. Rajeev  
-- Guided by: Ms. Pooja Gowda  
+  
 
 
