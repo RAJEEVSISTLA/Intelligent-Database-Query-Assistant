@@ -6,8 +6,6 @@ All rights reserved.
 **Students names:**  
 - S. Rajeev  
 
-**Guide name:**  
-Ms. Pooja Gowda
 
 ---
 
