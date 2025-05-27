@@ -10,7 +10,7 @@ All rights reserved.
 ---
 
 This software and its associated documentation are **proprietary and confidential**.  
-Unauthorized use, reproduction, distribution, or modification of any part of this codebase is strictly prohibited without **explicit written permission** from the supervising faculty (**Prof. Pooja Gowda**).
+Unauthorized use, reproduction, distribution, or modification of any part of this codebase is strictly prohibited without **explicit written permission** from (**SISTLA RAJEEV**).
 
 This repository is shared for **academic evaluation and publication purposes only**.
 
