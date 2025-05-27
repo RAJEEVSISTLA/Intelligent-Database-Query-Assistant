@@ -15,7 +15,7 @@ Unauthorized use, reproduction, distribution, or modification of any part of thi
 This repository is shared for **academic evaluation and publication purposes only**.
 
 If you wish to collaborate, request access, or seek clarification, please contact:  
-📧 **g_pooja@blr.amrita.edu**
+📧 **rajeevsistla2004@gmail.com**
 
 ---
 
