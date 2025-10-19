@@ -17,7 +17,7 @@ DB_CONFIG = {
     'host': os.getenv('DB_HOST', 'localhost'),
     'user': os.getenv('DB_USER', 'root'),
     'password': os.getenv('DB_PASSWORD', 'jaihanuman'),
-    'database': os.getenv('DB_NAME', 'chat_history_db')
+    'database': os.getenv('DB_NAME', 'rajeev')
 }
 
 # Initialize database with users table
@@ -119,15 +119,16 @@ def get_user_by_username(username):
             cursor.close()
             connection.close()
 
-# SQL Conversion
 def convert_to_sql_groq(nl_query, api_key):
+    import json, requests, re
+
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
     data = {
-        "model": "llama3-70b-8192",
+        "model": "llama-3.1-8b-instant",  # ✅ This is confirmed to work on Groq
         "messages": [
             {"role": "system", "content": "You are an assistant that converts English to SQL queries."},
             {"role": "user", "content": f"Convert this to SQL: {nl_query}"}
@@ -137,21 +138,28 @@ def convert_to_sql_groq(nl_query, api_key):
 
     try:
         response = requests.post(url, headers=headers, json=data)
+
+        # Debug info for 400 errors
+        if not response.ok:
+            print("🚨 Groq returned an error:")
+            print("Status:", response.status_code)
+            print("Body:", response.text)  # 👈 This shows the exact error reason
+
         response.raise_for_status()
-        
+
         result = response.json()
         raw_output = result["choices"][0]["message"]["content"].strip()
 
+        # Extract SQL inside ```sql ... ```
         matches = re.findall(r"```(?:sql)?\s*(.*?)\s*```", raw_output, re.DOTALL | re.IGNORECASE)
-        if matches:
-            sql_output = matches[0].strip()
-        else:
-            sql_output = raw_output.splitlines()[0].strip()
+        sql_output = matches[0].strip() if matches else raw_output.splitlines()[0].strip()
 
-        print("🧠 Cleaned SQL:", sql_output)
+        print("🧠 SQL generated:", sql_output)
         return sql_output
+
     except Exception as e:
         raise Exception(f"Error converting to SQL: {str(e)}")
+
 
 # SQL Execution
 def execute_sql_query(sql_query, db_config):
